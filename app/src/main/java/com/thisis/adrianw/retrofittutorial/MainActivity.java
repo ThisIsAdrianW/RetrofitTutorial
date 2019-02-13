@@ -17,6 +17,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
     private TextView textViewResult;
+    private JsonPlaceHolderApi jsonPlaceHolderApi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +28,10 @@ public class MainActivity extends AppCompatActivity {
                 .baseUrl("https://jsonplaceholder.typicode.com")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        JsonPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
+        jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
+        getPosts();
+    }
+    private void getPosts() {
         Call<List<Post>> call = jsonPlaceHolderApi.getPosts();
         call.enqueue(new Callback<List<Post>>() {
             @Override
@@ -46,7 +50,6 @@ public class MainActivity extends AppCompatActivity {
 
                 }
             }
-
             @Override
             public void onFailure(Call<List<Post>> call, Throwable t) {
                 textViewResult.setText(t.getMessage());
