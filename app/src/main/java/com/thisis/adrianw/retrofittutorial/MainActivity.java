@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView textViewResult;
     private JsonPlaceHolderApi jsonPlaceHolderApi;
     private int commentPageNumber = 3;
+    private int userIdQuery = 4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,11 +31,11 @@ public class MainActivity extends AppCompatActivity {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
-//        getPosts();
-        getComments();
+        getPosts();
+//        getComments();
     }
     private void getPosts() {
-        Call<List<Post>> call = jsonPlaceHolderApi.getPosts();
+        Call<List<Post>> call = jsonPlaceHolderApi.getPosts(userIdQuery);
         call.enqueue(new Callback<List<Post>>() {
             @Override
             public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
