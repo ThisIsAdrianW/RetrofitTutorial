@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
                 if (!response.isSuccessful()) {
                     textViewResult.setText("Code: "  + response.code());
+                    return;
                 }
                 List<Post> posts = response.body();
                 for (Post post : posts) {
@@ -58,6 +59,32 @@ public class MainActivity extends AppCompatActivity {
         });
     }
     private void getComments() {
-        
+        Call<List<Comment>> call = jsonPlaceHolderApi.getComments();
+        call.enqueue(new Callback<List<Comment>>() {
+            @Override
+            public void onResponse(Call<List<Comment>> call, Response<List<Comment>> response) {
+                if (!response.isSuccessful()) {
+                    textViewResult.setText("Code: "  + response.code());
+                    return;
+                }
+                List<Comment> comments = response.body();
+                for (Comment comment : comments) {
+                    String content = "";
+                    content += "ID " +  comment.getId() + "\n";
+                    content += "Post ID " + comment.getPostID() + "\n";
+                    content += "E-mail " + comment.getEmail() + "\n";
+                    content += "Name "  + comment.getName() + "\n";
+                    content += "Text " + comment.getText() + "\n\n";
+                    textViewResult.append(content);
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<List<Comment>> call, Throwable t) {
+                textViewResult.setText(t.getMessage());
+            }
+        });
     }
 }
