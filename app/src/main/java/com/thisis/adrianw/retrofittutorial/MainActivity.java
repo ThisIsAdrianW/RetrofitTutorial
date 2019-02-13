@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
 //        getComments();
     }
     private void getPosts() {
-        Call<List<Post>> call = jsonPlaceHolderApi.getPosts(userIdQuery);
+        Call<List<Post>> call = jsonPlaceHolderApi.getPosts(userIdQuery, "id", "desc");
         call.enqueue(new Callback<List<Post>>() {
             @Override
             public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
