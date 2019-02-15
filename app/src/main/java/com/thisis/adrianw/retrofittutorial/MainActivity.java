@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView textViewResult;
     private JsonPlaceHolderApi jsonPlaceHolderApi;
     private int commentPageNumber = 1;
-    private Integer userIdQuery = null;
+    private Integer[] userIdQuery = new Integer[]{1,4};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
