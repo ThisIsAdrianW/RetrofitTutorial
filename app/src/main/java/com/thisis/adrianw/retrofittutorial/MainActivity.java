@@ -29,12 +29,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         textViewResult = findViewById(R.id.text_view_result);
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://jsonplaceholder.typicode.com")
+                .baseUrl("https://jsonplaceholder.typicode.com/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
-        getPosts();
-//        getComments();
+//        getPosts();
+        getComments();
     }
     private void getPosts() {
         Map<String, String> parameters = new HashMap<>();
@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
     private void getComments() {
-        Call<List<Comment>> call = jsonPlaceHolderApi.getComments(commentPageNumber);
+        Call<List<Comment>> call = jsonPlaceHolderApi.getComments("posts/3/comments");
         call.enqueue(new Callback<List<Comment>>() {
             @Override
             public void onResponse(Call<List<Comment>> call, Response<List<Comment>> response) {
