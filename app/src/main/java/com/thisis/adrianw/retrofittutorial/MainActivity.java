@@ -18,8 +18,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MainActivity extends AppCompatActivity {
     private TextView textViewResult;
     private JsonPlaceHolderApi jsonPlaceHolderApi;
-    private int commentPageNumber = 3;
-    private int userIdQuery = 4;
+    private Integer commentPageNumber = null;
+    private Integer userIdQuery = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
 //        getComments();
     }
     private void getPosts() {
-        Call<List<Post>> call = jsonPlaceHolderApi.getPosts(userIdQuery, "id", "desc");
+        Call<List<Post>> call = jsonPlaceHolderApi.getPosts(userIdQuery, null, null);
         call.enqueue(new Callback<List<Post>>() {
             @Override
             public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
