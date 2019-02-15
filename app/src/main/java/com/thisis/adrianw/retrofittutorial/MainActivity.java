@@ -18,7 +18,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MainActivity extends AppCompatActivity {
     private TextView textViewResult;
     private JsonPlaceHolderApi jsonPlaceHolderApi;
-    private Integer commentPageNumber = null;
+    private int commentPageNumber = 1;
     private Integer userIdQuery = null;
 
     @Override
