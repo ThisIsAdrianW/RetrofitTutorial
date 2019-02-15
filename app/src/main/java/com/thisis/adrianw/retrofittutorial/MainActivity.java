@@ -7,7 +7,9 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -35,7 +37,11 @@ public class MainActivity extends AppCompatActivity {
 //        getComments();
     }
     private void getPosts() {
-        Call<List<Post>> call = jsonPlaceHolderApi.getPosts(userIdQuery, null, null);
+        Map<String, String> parameters = new HashMap<>();
+        parameters.put("userId", "1");
+        parameters.put("_sort", "id");
+        parameters.put("_order", "desc");
+        Call<List<Post>> call = jsonPlaceHolderApi.getPosts(parameters);
         call.enqueue(new Callback<List<Post>>() {
             @Override
             public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
