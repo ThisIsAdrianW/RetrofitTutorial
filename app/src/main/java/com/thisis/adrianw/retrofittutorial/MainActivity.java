@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
                 .build();
         jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
 //        getPosts();
-        getComments();
+//        getComments();
     }
     private void getPosts() {
         Map<String, String> parameters = new HashMap<>();
