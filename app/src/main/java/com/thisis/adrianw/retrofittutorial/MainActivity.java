@@ -39,7 +39,9 @@ public class MainActivity extends AppCompatActivity {
 //        getPosts();
 //        getComments();
 //        createPosts();
-        updatePost();
+//        updatePost();
+        deletePost();
+
     }
     private void getPosts() {
         Map<String, String> parameters = new HashMap<>();
@@ -157,5 +159,19 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+    private void deletePost() {
+        Call<Void> call = jsonPlaceHolderApi.deletePost(5);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                textViewResult.setText("Code " + response.code());
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+
+            }
+        });
     }
 }
