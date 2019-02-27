@@ -170,7 +170,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-
+                textViewResult.setText(t.getMessage());
             }
         });
     }
