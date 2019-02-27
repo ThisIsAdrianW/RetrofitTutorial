@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.util.HashMap;
 import java.util.List;
@@ -28,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         textViewResult = findViewById(R.id.text_view_result);
+        //This should pass null values if used in GsonConverterFacetory.create(putItHere)
+        Gson gson = new GsonBuilder().serializeNulls().create();
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://jsonplaceholder.typicode.com/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -130,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
     }
     private void updatePost() {
         Post post = new Post(6, null, "body of post");
-        Call<Post> call = jsonPlaceHolderApi.putPost(6, post);
+        Call<Post> call = jsonPlaceHolderApi.patchPost(6, post);
         call.enqueue(new Callback<Post>() {
             @Override
             public void onResponse(Call<Post> call, Response<Post> response) {
